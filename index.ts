@@ -74,7 +74,7 @@ async function main() {
     const result = await prisma.$queryRaw(query);
     console.log(result);
   
-  */
+  
 
   const inputString1 = firstNameStr
   const inputString2 = secondNameStr
@@ -94,6 +94,23 @@ async function main() {
 
   const result = await prisma.$queryRaw(query);
   console.log(result);
+
+  */
+
+    const query1 = `SELECT id, name FROM "User" WHERE name = `
+    const query2 = ` OR name = `
+
+    // inputString can be untrusted input
+    //const inputString = `'Sarah' UNION SELECT id, title FROM "Post"`
+
+    const inputString1 = firstNameStr
+    const inputString2 = secondNameStr
+
+    const query = Prisma.sql([query1, query2, ""], inputString1, inputString2)
+    
+    const result = await prisma.$queryRaw(query);
+    console.log(result);
+    
 
 }
 
