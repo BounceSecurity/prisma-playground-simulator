@@ -1,6 +1,8 @@
 import { Prisma, PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient({
+  log: ['query'],
+})
 
 async function main() {
 
@@ -95,7 +97,7 @@ async function main() {
   const result = await prisma.$queryRaw(query);
   console.log(result);
 
-  */
+ 
 
     const query1 = `SELECT id, name FROM "User" WHERE name = `
     const query2 = ` OR name = `
@@ -110,6 +112,23 @@ async function main() {
     
     const result = await prisma.$queryRaw(query);
     console.log(result);
+
+     */
+
+    const inputString1 = firstNameStr
+    
+    const untrustedInput = `lomo@prisma.io' OR '1'='1' OR '1'='1 `
+    const queryString1 = `SELECT * FROM "User" WHERE name = `
+    const queryString2 = ` AND 1=1`
+    
+    const query = Prisma.sql([queryString1, queryString2], untrustedInput)
+    
+    const users = await prisma.$queryRaw(query)
+    console.log(users)
+
+
+    const users2 = await prisma.$queryRawUnsafe(`${queryString1}'${untrustedInput}'${queryString2}`)
+    console.log(users2)
     
 
 }
