@@ -1,5 +1,11 @@
 # prisma-playground-simulator
 
+## Introduction
+
+This is designed to be an offline version of the [Prisma Playground](https://playground.prisma.io/examples) as I found that the online version sometimes errors out and can sometimes be a little slow.
+
+Note that this repo is based on the template that Prisma uses to demonstrate its Client Extensions, e.g. [this one](https://github.com/prisma/prisma-client-extensions/tree/main/row-level-security) so thanks to them for that 😀
+
 ## How to use
 
 ### Prerequisites
